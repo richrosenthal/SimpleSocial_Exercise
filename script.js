@@ -30,7 +30,7 @@ let userNamePrompt = prompt("What's your username?");
 let passwordPrompt = prompt("What's your password?");
 
 function generateNewsFeed(){
-documentTest = document.getElementById("newsfeed");
+let documentTest = document.getElementById("newsfeed");
 documentTest.innerHTML +=
 `
        <h1> ${newsFeed[0].username} </h1><br>
@@ -39,30 +39,28 @@ documentTest.innerHTML +=
        <h1> ${newsFeed[1].username} </h1><br>
        <p> says: ${newsFeed[1].timeline} </p><br>
        <br>
-      `;
+      `
 }
 
-//prompts user to login to see newsfeed
-function logIn(user, password) {
-  if ((user === database[0].username && password === database[0].password) ||
-  (user === database[1].username && password === database[1].password))
-   {
-      // console.log(newsFeed[0].username + " says " + newsFeed[0].timeline);
-      // console.log(newsFeed[1].username + " says " + newsFeed[1].timeline);
-       trueFlag = true;
-       console.log(trueFlag)
-       console.log("here")
-       checkNewsFlag();
-    } else {
-      alert("Sorry, wrong username and password bucko!")
+//Validates user
+function isUserValid(username, password){
+  for (let i=0; i < database.length; i++){
+    if(database[i].username === username && database[i].password === password){
+      return true
     }
-}
-
-function checkNewsFlag(){
-  if (trueFlag === true){
-    generateNewsFeed();
   }
-
+  return false;
 }
-console.log("before login")
+//prompts user to login to see newsfeed
+function logIn(username, password) {
+  if (isUserValid(username, password)) {
+    console.log(newsFeed[0].username + " says " + newsFeed[0].timeline);
+    console.log(newsFeed[1].username + " says " + newsFeed[1].timeline);
+  } else {
+    alert("Wrong password and username bucko");
+  }
+}
+
+
+
 logIn(userNamePrompt, passwordPrompt)
