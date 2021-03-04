@@ -1,6 +1,11 @@
-//to append html back into index.html
-var timelineFeed = document.getElementById("newsfeed")
-var trueFlag = false
+document.addEventListener("DOMContentLoaded", () => {
+  console.log("THE JS LOADED")
+
+  logIn(userNamePrompt, passwordPrompt);
+
+
+})
+
 //simple database
 let database = [
   {
@@ -56,11 +61,8 @@ function logIn(username, password) {
   if (isUserValid(username, password)) {
     console.log(newsFeed[0].username + " says " + newsFeed[0].timeline);
     console.log(newsFeed[1].username + " says " + newsFeed[1].timeline);
+    generateNewsFeed();
   } else {
     alert("Wrong password and username bucko");
   }
 }
-
-
-
-logIn(userNamePrompt, passwordPrompt)
